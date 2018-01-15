@@ -94,10 +94,11 @@ typedef long(_stdcall *FN_USR_UnSubscribeUserRaw)(LPCWSTR Username);
 //推送回调
 typedef void(_stdcall *TUSR_PubAckEvent)(long MessageID);
 typedef boolean(_stdcall *FN_USR_OnPubAck)(TUSR_PubAckEvent OnPubAck);
-// 设置单台设备数据点值【云组态】
-typedef long(_stdcall *FN_USR_PublishParsedSetDataPoint)(LPCWSTR DevId, LPCWSTR PointId, LPCWSTR Value);
-// 查询单台设备数据点值【云组态】
-typedef long(_stdcall *FN_USR_PublishParsedQueryDataPoint)(LPCWSTR DevId, LPCWSTR PointId);
+
+// 设置数据点值【云组态】
+typedef long(_stdcall *FN_USR_PublishParsedSetSlaveDataPoint)(LPCWSTR DevId, LPCWSTR SlaveIndex, LPCWSTR PointId, LPCWSTR Value);
+// 查询数据点值【云组态】
+typedef long(_stdcall *FN_USR_PublishParsedQuerySlaveDataPoint)(LPCWSTR DevId, LPCWSTR SlaveIndex, LPCWSTR PointId);
 // 向单台设备推送原始数据流 【云交换机】
 typedef long(_stdcall *FN_USR_PublishRawToDev)(LPCWSTR DevId, void *pData, long DataLen);
 // 向账户下所有设备推送原始数据流 【云交换机】
@@ -110,16 +111,27 @@ typedef long(_stdcall *FN_USR_PublishRawToUser)(LPCWSTR Username, void *pData, l
 // 接收设备解析后的数据 事件 【云组态】
 typedef void(_stdcall *TUSR_RcvParsedEvent)(long MessageID, LPCWSTR DevId, LPCWSTR JsonStr);
 
-// 设置 接收设备数据点推送 回调函数 【云组态】
+// 设置 接收数据点推送 回调函数 【云组态】
 typedef boolean(_stdcall *FN_USR_OnRcvParsedDataPointPush)(TUSR_RcvParsedEvent OnRcvParsed);
 // 设置 接收设备上下线推送 回调函数 【云组态】
 typedef boolean(_stdcall *FN_USR_OnRcvParsedDevStatusPush)(TUSR_RcvParsedEvent OnRcvParsed);
 // 设置 接收设备报警推送 回调函数 【云组态】
 typedef boolean(_stdcall *FN_USR_OnRcvParsedDevAlarmPush)(TUSR_RcvParsedEvent OnRcvParsed);
-// 设置 接收设备数据点操作应答 【云组态】
+// 设置 接收数据点操作应答 【云组态】
 typedef boolean(_stdcall *FN_USR_OnRcvParsedOptionResponseReturn)(TUSR_RcvParsedEvent OnRcvParsed);
 
 // 接收设备原始数据流 事件 【云交换机】 
 typedef void(_stdcall *TUSR_RcvRawEvent)(long MessageID, LPCWSTR DevId, void *pData, long DataLen);
 // 设置 接收设备原始数据流 回调函数 【云交换机】
 typedef boolean(_stdcall *FN_USR_OnRcvRawFromDev)(TUSR_RcvRawEvent OnRcvRaw);
+
+/////////////////////////////////////////
+/////////  不再建议使用的函数 ///////////
+/////////  不再建议使用的函数 ///////////
+/////////  不再建议使用的函数 ///////////
+/////////////////////////////////////////
+
+// 设置单台设备数据点值【云组态】, 用 FN_USR_PublishParsedSetSlaveDataPoint 代替
+typedef long(_stdcall *FN_USR_PublishParsedSetDataPoint)(LPCWSTR DevId, LPCWSTR PointId, LPCWSTR Value);
+// 查询单台设备数据点值【云组态】,用 FN_USR_PublishParsedQuerySlaveDataPoint 代替
+typedef long(_stdcall *FN_USR_PublishParsedQueryDataPoint)(LPCWSTR DevId, LPCWSTR PointId);
